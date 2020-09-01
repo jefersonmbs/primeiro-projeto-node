@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { startOfHour, parseISO, isEqual } from 'date-fns';
-import Appointments from '../models/Appointement';
+import { startOfHour, parseISO } from 'date-fns';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 const appointmentsRouter = Router();
