@@ -4,7 +4,13 @@ import { startOfHour, parseISO, isEqual } from 'date-fns';
 
 const appointmentsRouter = Router();
 
-const appointments: { id: string; provider: string; date: Date }[] = [];
+interface Appointments {
+  id: string;
+  provider: string;
+  date: Date;
+}
+
+const appointments: Appointments[] = [];
 
 appointmentsRouter.post('/', (request, response) => {
   const { provider, date } = request.body;
