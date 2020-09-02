@@ -3,7 +3,6 @@ import { startOfHour, parseISO } from 'date-fns';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 const appointmentsRouter = Router();
-
 const appointmentRepository = new AppointmentsRepository();
 
 appointmentsRouter.post('/', (request, response) => {
@@ -14,13 +13,16 @@ appointmentsRouter.post('/', (request, response) => {
   if (appointmentRepository.findByDate(parsedDate)) {
     return response.status(400).json({ error: 'Date ocuped.' });
   }
-  const appointment = appointmentRepository.create(provider, parsedDate);
+  const appointment = appointmentRepository.create({
+    provider,
+    date: parsedDate,
+  });
 
   return response.json(appointment);
 });
 
 appointmentsRouter.get('/', (request, response) => {
-  return response.json(appointmentRepository.list());
+  return response.json(appointmentRepository.listAll());
 });
 
 export default appointmentsRouter;
